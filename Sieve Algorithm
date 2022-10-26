@@ -1,0 +1,11 @@
+const ll N = 100000;
+vector <ll> check(N+5);
+vector <ll> prime;
+void sieve(){
+	for(ll i = 2; i <= N; i++){
+		if(!check[i]){
+			prime.push_back(i);
+			for(ll j = i*2; j <= N; j += i) check[j] = 1;
+		}	
+	}
+}
