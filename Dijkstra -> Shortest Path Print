@@ -1,0 +1,43 @@
+const ll N = 1e5+7;
+vector<Pair> adjList[N];
+int prevNode[N];
+ll cost[N];
+vector<int> path;
+
+void dijkstra(){
+    int node, edge;
+    cin >> node >> edge;
+
+    while (edge--) {
+        int u, v, w;
+        cin >> u >> v >> w;
+        adjList[u].push_back({v, w});
+        adjList[v].push_back({u, w});
+    }
+
+    for (int i = 2; i <= node; i++) cost[i] = 1e18;
+
+    priority_queue<Pair, vector<Pair>, greater<Pair>> pq;
+    pq.push({0, 1});
+
+    while (!pq.empty()) {
+        int currNode = pq.top().second;
+        pq.pop();
+
+        for (auto &u : adjList[currNode]) {
+            // Relaxation
+            if (cost[u.first] > cost[currNode] + u.second) {
+                cost[u.first] = cost[currNode] + u.second;
+                prevNode[u.first] = currNode;
+                pq.push({u.second, u.first});
+            }
+        }
+    }
+
+    path.push_back(node);
+    while (prevNode[node] != 0) {
+        path.push_back(prevNode[node]);
+        node = prevNode[node];
+    }
+    reverse(all(path));
+}
