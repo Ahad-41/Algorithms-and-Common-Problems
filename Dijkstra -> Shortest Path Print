@@ -1,3 +1,6 @@
+#define all(x) (x).begin(), (x).end()
+#define Pair pair<int, int>
+
 const ll N = 1e5+7;
 vector<Pair> adjList[N];
 int prevNode[N];
