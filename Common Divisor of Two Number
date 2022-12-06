@@ -1,0 +1,13 @@
+int commonDivisorOfTwoNumber(int a, int b){    	
+    int n = __gcd(a, b);
+
+    int commonDivisor = 0;
+    for (int i = 1; i * i <= n; i++) {
+        if (n % i == 0) {
+            if (n/i == i) commonDivisor++;
+            else commonDivisor += 2;
+        }
+    }
+        
+    return commonDivisor;
+}
