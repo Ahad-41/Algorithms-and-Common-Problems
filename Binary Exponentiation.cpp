@@ -5,8 +5,9 @@ const int M = 1e9+7;
 int binExpWithRecursion(int base, int power) {
     if (!power) return 1; // base case
     int result = binExpWithRecursion(base, power/2);
-    if (power & 1) return (result * (result * base) % M) % M;
-    return (result * result) % M;
+    result = (result * result) % M;
+    if (power & 1) result = (result * base) % M;
+    return result
 }
 
 int binExp(int base, int power) {
