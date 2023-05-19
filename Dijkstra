@@ -11,17 +11,7 @@ ll prevNode[N];
 ll cost[N];
 vector<ll> path;
 
-int main(){
-    ll node, edge;
-    cin >> node >> edge;
-
-    while (edge--) {
-        ll u, v, w;
-        cin >> u >> v >> w;
-        adjList[u].push_back({v, w});
-        // adjList[v].push_back({u, w});
-    }
-
+void dijkstra(ll node) {
     for (ll i = 0; i <= node; i++) cost[i] = 1e18;
     cost[1] = 0;
 
@@ -44,6 +34,19 @@ int main(){
             }
         }
     }
+}
+
+int main(){
+    ll node, edge; cin >> node >> edge;
+
+    while (edge--) {
+        ll u, v, w;
+        cin >> u >> v >> w;
+        adjList[u].push_back({v, w});
+        adjList[v].push_back({u, w});
+    }
+
+    dijkstra(node);
 
     // path.push_back(node);
     // while (prevNode[node] != 0) {
@@ -51,7 +54,7 @@ int main(){
     //     node = prevNode[node];
     // }
     // reverse(all(path));
-
-    for (ll i = 1; i <= node; i++) cout << cost[i] << " ";
-    cout << endl;
+    
+    // for (ll i = 1; i <= node; i++) cout << cost[i] << " ";
+    // cout << endl;
 }
