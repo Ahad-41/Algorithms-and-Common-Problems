@@ -38,6 +38,7 @@ void dijkstra(ll node) {
 
 int main(){
     ll node, edge; cin >> node >> edge;
+    for (auto &u : adjList) u.clear();
 
     while (edge--) {
         ll u, v, w;
