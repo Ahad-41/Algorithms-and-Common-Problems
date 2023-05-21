@@ -19,7 +19,7 @@ bool bellmanFord(ll n, ll m) {
     for (ll i = 1; i <= n; i++) {
         isCycle = false;
         for (auto &e : edge) {
-            if (cost[e.u] < 1e18 and cost[e.u]+e.w < cost[e.v]) {
+            if (cost[e.u]+e.w < cost[e.v]) {
                 cost[e.v] = cost[e.u]+e.w;
                 isCycle = true;
             }
