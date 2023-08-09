@@ -27,8 +27,8 @@ void dijkstra(ll node) {
 
         for (auto &u : adjList[currNode]) {
             // Relaxation
-            if (cost[u.first] > currNodeCost + u.second) {
-                cost[u.first] = currNodeCost + u.second;
+            if (cost[u.first] > cost[currNode] + u.second) {
+                cost[u.first] = cost[currNode] + u.second;
                 // prevNode[u.first] = currNode;
                 pq.push({cost[u.first], u.first});
             }
