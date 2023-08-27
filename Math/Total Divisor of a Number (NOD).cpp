@@ -1,24 +1,31 @@
-int divisorCount(int n)
-{
-    int totalDivisor = 1, count = 0;
-    while (n % 2 == 0)
-    {
-        count++;
-        n /= 2;
-    }
-    totalDivisor *= (count + 1);
+const ll N = 1e6+7;
+bool check[N];
+vector<ll> prime;
+void sieve() {
+    for (ll i = 3; i < N; i += 2) 
+        if (!check[i])
+            for (ll j = i*i; j < N; j += i) check[j] = true;
 
-    for (int i = 3; i <= sqrt(n); i = i + 2)
-    {
-        count = 0;
-        while (n % i == 0)
-        {
-            count++;
-            n /= i;
+    prime.push_back(2);
+    for (ll i = 3; i < N; i += 2) 
+        if (!check[i]) prime.push_back(i);
+}
+
+ll divisorCount(ll n) {
+    ll totalDivisor = 1;
+    for (ll i = 0; i < N; i++) {
+        if (prime[i]*prime[i] > n) break;
+        
+        if (n % prime[i] == 0) {
+            ll curr = 0;
+            while (n > 1 and n % prime[i] == 0) {
+                curr++;
+                n /= prime[i];
+            }
+            totalDivisor *= (curr+1);
         }
-        totalDivisor *= (count + 1);
     }
-    if (n > 2) totalDivisor *= 2;
+    if (n != 1) totalDivisor *= 2;
     
     return totalDivisor;
 }
