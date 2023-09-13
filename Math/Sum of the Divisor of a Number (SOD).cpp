@@ -1,23 +1,26 @@
-int sumOfDivisor(int n)
-{
-    int totalSum = 1, count = 0, sum = 1;
-    while (n % 2 == 0)
-    {
-        count++;
-        sum += pow(2, count);
-        n /= 2;
-    }
-    totalSum *= sum;
+vector<ll> prime;
+const ll N = 1e7+7;
+bool check[N];
+void sieve() {
+    for (ll i = 3; i < N; i += 2) 
+        if (!check[i])
+            for (ll j = i*i; j < N; j += i) check[j] = true;
 
-    for (int i = 3; i <= sqrt(n); i += 2)
-    {
+    prime.push_back(2);
+    for (ll i = 3; i < N; i += 2) 
+        if (!check[i]) prime.push_back(i);
+}
+
+ll sumOfDivisor(ll n) {
+    ll totalSum = 1, count = 0, sum = 1;
+    for (auto &u : prime) {
+        if (u > n) break;
         count = 0;
         sum = 1;
-        while (n % i == 0)
-        {
+        while (n % u == 0) {
             count++;
-            sum += pow(i, count);
-            n /= i;
+            sum += pow(u, count);
+            n /= u;
         }
         totalSum *= sum;
     }
