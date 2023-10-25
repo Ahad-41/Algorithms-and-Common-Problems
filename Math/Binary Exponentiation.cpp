@@ -7,7 +7,7 @@ int binExpWithRecursion(int base, int power) {
     int result = binExpWithRecursion(base, power/2);
     result = (result * result) % M;
     if (power & 1) result = (result * base) % M;
-    return result
+    return result;
 }
 
 int binExp(int base, int power) {
