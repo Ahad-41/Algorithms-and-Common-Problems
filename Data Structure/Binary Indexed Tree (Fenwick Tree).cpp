@@ -13,7 +13,7 @@ int query(int index) {
     return sum;
 }
 
-int update(int index, int value, int n) {
+void update(int index, int value, int n) {
     while (index <= n) {
         tree[index] += value;
         index += index & (-index);
