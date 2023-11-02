@@ -14,7 +14,7 @@ void sieve() {
 ll sumOfDivisor(ll n) {
     ll totalSum = 1, count = 0, sum = 1;
     for (auto &u : prime) {
-        if (u > n) break;
+        if (u*u > n) break;
         count = 0;
         sum = 1;
         while (n % u == 0) {
