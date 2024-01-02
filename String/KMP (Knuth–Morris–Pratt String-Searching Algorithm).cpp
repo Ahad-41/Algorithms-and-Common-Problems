@@ -1,30 +1,22 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-vector <int> createFailureTable (string pattern) {
-    int M = pattern.size();
-    vector <int> failureTable(M);
-    int index = 0;
-    for (int i = 1; i < M; ) {
-        if (pattern[index] == pattern[i]) {
-            failureTable[i] = index + 1;
-            index++;
-            i++;
-        }
-        else {
-            if (index != 0) index = failureTable[index - 1];
-            else {
-                failureTable[i] = index;
-                i++;
-            }
-        }
-    }
-    return failureTable;
+vector<int> lps(string s) {
+    int n = s.size();
+    vector<int> lpsArray(n);
+    int j = 0;
+    for (int i = 1; i < n; i++) {
+        while (j > 0 and s[j] != s[i]) j = lpsArray[j-1];
+        if (s[j] == s[i]) j++;
+        lpsArray[i] = j;
+    }   
+
+    return lpsArray;
 }
 
 bool kmp (string text, string pattern) {
     int N = text.size(), M = pattern.size();
-    vector<int> failureTable = createFailureTable(pattern);
+    vector<int> lpsArray = lps(pattern);
 
     int i = 0, j = 0;
     while (i < N) {
@@ -33,7 +25,7 @@ bool kmp (string text, string pattern) {
             j++;
         }
         else {
-            if (j != 0) j = failureTable[j-1];
+            if (j != 0) j = lpsArray[j-1];
             else i++;
         }
         if (j == M) return true;
