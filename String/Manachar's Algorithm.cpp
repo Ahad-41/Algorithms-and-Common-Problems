@@ -32,16 +32,15 @@ signed main()
 {
     ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
     string s; cin >> s;
-
     auto P = manachar(s);
-    ll n = P.size(), maxPalindrome = 0, centerIndex = 0;
-
-    for (ll i = 1; i < n-1; i++) {
-        if (P[i] > maxPalindrome) {
-            maxPalindrome = P[i];
-            centerIndex = i;
-        }
-    }
+    
+    //ll n = P.size(), maxPalindrome = 0, centerIndex = 0;\
+    // for (ll i = 1; i < n-1; i++) {
+    //     if (P[i] > maxPalindrome) {
+    //         maxPalindrome = P[i];
+    //         centerIndex = i;
+    //     }
+    // }
 
     // cout << maxPalindrome << endl;
     // cout << s.substr( (centerIndex - 1 - maxPalindrome) / 2, maxPalindrome) << endl;
