@@ -1,11 +1,11 @@
 #include <bits/stdc++.h>
 using namespace std;
+typedef long long int ll;
 
-vector<int> lps(string s) {
-    int n = s.size();
-    vector<int> lpsArray(n);
-    int j = 0;
-    for (int i = 1; i < n; i++) {
+vector<ll> calcLPS(string s) {
+    ll n = s.length();
+    vector<ll> lpsArray(n);
+    for (ll i = 1, j = 0; i < n; i++) {
         while (j > 0 and s[j] != s[i]) j = lpsArray[j-1];
         if (s[j] == s[i]) j++;
         lpsArray[i] = j;
@@ -14,23 +14,21 @@ vector<int> lps(string s) {
     return lpsArray;
 }
 
-bool kmp (string text, string pattern) {
-    int N = text.size(), M = pattern.size();
-    vector<int> lpsArray = lps(pattern);
+ll kmp(string text, string pattern) {
+    vector<ll> lpsArray = calcLPS(pattern);
 
-    int i = 0, j = 0;
-    while (i < N) {
-        if (text[i] == pattern[j]) {
-            i++;
-            j++;
+    ll n = text.length(), m = pattern.length();
+    ll matches = 0;
+    for (ll i = 0, j = 0; i < n; i++) {
+        while (j > 0 and pattern[j] != text[i]) j = lpsArray[j-1];
+        if (pattern[j] == text[i]) j++;
+        if (j == m) {
+            matches++;
+            j = lpsArray[j-1];
         }
-        else {
-            if (j != 0) j = lpsArray[j-1];
-            else i++;
-        }
-        if (j == M) return true;
-    } 
-    return false; 
+    }   
+
+    return matches;
 }
 
 int main()
