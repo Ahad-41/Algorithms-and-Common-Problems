@@ -9,7 +9,7 @@ ll lcs(ll i, ll j, string &s1, string &s2) {
     return dp[i][j] = ans;
 }
 
-// print the lcs string
+// print the lcs string - iterative way
 string lcs(string a, string b) {
     ll m = a.length(), n = b.length();
     
@@ -18,14 +18,14 @@ string lcs(string a, string b) {
 
     for (ll i = 1; i <= m; i++) {
         for (ll j = 1; j <= n; j++) {
-            if (a[i-1] == b[j-1]) dp[i][j] = dp[i - 1][j - 1] + 1;
+            if (a[i-1] == b[j-1]) dp[i][j] = dp[i-1][j-1] + 1;
             else dp[i][j] = max(dp[i-1][j], dp[i][j-1]);
         }
     }
 
     ll i = m, j = n;
     string ans;
-    while (i > 0 && j > 0) {
+    while (i > 0 and j > 0) {
         if (a[i-1] == b[j-1]) {
             ans = a[i-1] + ans;
             i--;
