@@ -12,15 +12,13 @@ ll lcs(ll i, ll j, string &s1, string &s2) {
 // print the lcs string
 string lcs(string a, string b) {
     ll m = a.length(), n = b.length();
-    a = '@' + a;
-    b = '@' + b;
     
     ll dp[m+1][n+1];
     memset(dp, 0, sizeof(dp));
 
     for (ll i = 1; i <= m; i++) {
         for (ll j = 1; j <= n; j++) {
-            if (a[i] == b[j]) dp[i][j] = dp[i - 1][j - 1] + 1;
+            if (a[i-1] == b[j-1]) dp[i][j] = dp[i - 1][j - 1] + 1;
             else dp[i][j] = max(dp[i-1][j], dp[i][j-1]);
         }
     }
@@ -28,8 +26,8 @@ string lcs(string a, string b) {
     ll i = m, j = n;
     string ans;
     while (i > 0 && j > 0) {
-        if (a[i] == b[j]) {
-            ans = a[i] + ans;
+        if (a[i-1] == b[j-1]) {
+            ans = a[i-1] + ans;
             i--;
             j--;
         }
